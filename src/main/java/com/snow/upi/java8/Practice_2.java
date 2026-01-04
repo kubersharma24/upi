@@ -2,7 +2,13 @@ package com.snow.upi.java8;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 /*
 Questions
@@ -181,9 +187,84 @@ Questions
 		  System.out.println(ans.get()); // 3 
 
 */
+
+
+
+/*
+ * 			Stream with User Defined DataType
+ * 
+ * Employee e1 = new Employee(1,20_000,"IT","A1");
+Employee e2 = new Employee(2,30_000,"IT","A2");
+Employee e3 = new Employee(3,40_000,"IT","A3");
+Employee e4 = new Employee(4,70_000,"IT","A4");
+Employee e5 = new Employee(5,30_000,"IT","A5");
+Employee e6 = new Employee(6,20_000,"IT","A6");
+Employee e7 = new Employee(7,30_000,"IT","A7");
+Employee e8 = new Employee(8,80_000,"FINANCE","A8");
+Employee e9 = new Employee(9,990_000,"FINANCE","A9");
+		List<Employee> list = Arrays.asList(e1,e9,e3,e4,e5,e6,e7,e8,e2);
+		Collections.sort(list, (a,b)-> Integer.compare(b.getSalary(), a.getSalary())); // sort with compartor
+		
+		
+1. Group Employe with Same department 
+	ans : Map<String, List<Employee>> map = list.stream().collect(Collectors.groupingBy(a->a.getDepartment()));
+	   	  System.out.println(map);
+	   	  
+2. Max Salary from employees 
+	ans : Employee e = list.stream().max((a,b)-> Integer.compare(a.getSalary(), b.getSalary())).get();
+		  System.out.println(e); //Employee(id=9, salary=990000, department=FINANCE, name=A9)
+		  
+3. Avg. Salary of all individual department
+	ans : Map<String, Double> map = list.stream().collect(Collectors.groupingBy(a-> a.getDepartment(), Collectors.averagingDouble(a ->a.getSalary())));
+		System.out.println(map);
+
+4. Count Employess i all department 
+	ans : Map<String, Long> map = list.stream().collect(Collectors.groupingBy(a-> a.getDepartment(), Collectors.counting()));
+		System.out.println(map); {FINANCE=2, IT=7}
+		
+		
+5. Print top 3 Salaried Employee 
+	ans : list.stream().limit(3).forEach(System.out::println);
+
+6. Print top 2nd salaried Employee
+	ans : list.stream().skip(1).limit(1).forEach(System.out::println);
+
+7. Print top 1st salaried Employee
+	ans : list.stream().limit(1).forEach(System.out::println);
+*
+*
+*/
+
 public class Practice_2 {
 	public static void main(String[] args) {
 		
-	      
 	}
+}
+
+@Getter 
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+class Employee{
+	private int id;
+	private int salary;
+	private String department;
+	private String name;
+	
+	@Override
+	public boolean equals(Object o) {
+		if(this == o) return true;
+		if(o == null || o.getClass()!= getClass()) return false;
+		Employee e = (Employee) o;
+		return this.id == e.getId() && Objects.equals(name, e.name) && this.salary == e.getSalary();
+			
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(name,id);
+	}
+	
+	
 }
