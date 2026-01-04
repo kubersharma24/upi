@@ -187,9 +187,3 @@ public class Practice_2 {
 	      
 	}
 }
-
-////	      List<Integer> list = Arrays.stream(num).boxed().collect(Collectors.toList());
-//	      int a = list.stream().mapToInt(x -> x).sum();
-//	      Integer [] num = {1,2,3,4,5,6,7,8};
-//	      List<Integer> list = Arrays.asList(num);
-//	      List<Integer> l  = list.stream().filter(x -> x%2==0 ).collect(Collectors.toList());
