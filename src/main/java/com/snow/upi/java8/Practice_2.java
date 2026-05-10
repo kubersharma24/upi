@@ -3,6 +3,7 @@ package com.snow.upi.java8;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -237,6 +238,11 @@ Employee e9 = new Employee(9,990_000,"FINANCE","A9");
 
 public class Practice_2 {
 	public static void main(String[] args) {
+		int arr[] = {2,3,4,2,1,5,2,3,9,8,1,3,5,1};
+		List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
+//		List<String> list = Arrays.asList("123","12345","57854321");
+		
+		
 		
 	}
 }
